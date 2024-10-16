@@ -1,4 +1,4 @@
-my-express-app/
+project-osc/
 ├── node_modules/
 ├── public/
 │   ├── css/
@@ -54,3 +54,27 @@ npm install dotenv
 =========================Important====================================
 - https://www.sap.com/africa/index.html?url_id=auto_hp_redirect_africa
 - https://www.ibm.com/fr-fr
+
+Commande pour exécuter le projet express: node ./src/server.js
+-------------------------------------- Lorsque les données deviennent important --------------------------------------
+// src/data/content.json
+{
+  "homePage": {
+    "title": "Home Page",
+    "message": "Welcome to our application! This is a larger piece of text that will be inserted into the template. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  }
+}
+
+
+// src/controllers/homeController.js
+const fs = require('fs');
+const path = require('path');
+
+exports.getHomePage = (req, res, next) => {
+  try {
+    const content = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/content.json'), 'utf8'));
+    res.render('home', content.homePage);
+  } catch (err) {
+    next(err);
+  }
+};

@@ -1,15 +1,18 @@
-//app.js
+// src/app.js
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const app = express();
-const userRoutes = require('./routes/userRoutes');
 const morgan = require('morgan');
+const userRoutes = require('./routes/userRoutes');
+//const bootstrap = require('bootstrap');
+
+
+const app = express();
 
 // Middleware de logging
 app.use(morgan('dev'));
 
-// Configure Handlebars
+// Configurer Handlebars
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
@@ -19,7 +22,10 @@ app.set('views', path.join(__dirname, 'views'));
 // Servir des fichiers statiques à partir du répertoire 'public'
 app.use(express.static(path.join(__dirname, '../public')));
 
+// Middleware pour parsing JSON
 app.use(express.json());
+
+// Routes
 app.use('/api/users', userRoutes);
 
 // Route pour rendre une vue Handlebars

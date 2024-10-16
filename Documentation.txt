@@ -1,0 +1,59 @@
+====================================================  STRUCTURE ET ARCHITECTURE  ====================================================
+1-Node JS pour le backend;
+2-BD Mongo DB;
+3-JQuery et utiliser le model de template handlebars pour node  JS;
+
+
+1. Table projects (Projets)
+    id : INT, clé primaire, auto-incrémentée
+    title : VARCHAR(255), titre du projet
+    description : TEXT, description détaillée du projet
+    image_url : VARCHAR(255), URL de l’image de présentation du projet
+    start_date : DATE, date de début du projet
+    end_date : DATE, date de fin (ou NULL si le projet est en cours)
+    status : VARCHAR(50), statut du projet (ex: "en cours", "terminé", "à venir")
+    category_id : INT, référence à la catégorie du projet (si nécessaire)
+
+2. Table categories (Catégories de projets)
+    id : INT, clé primaire, auto-incrémentée
+    name : VARCHAR(255), nom de la catégorie (ex : "Développement web", "Marketing", "Design")
+    3. Table team_members (Membres de l'équipe)
+    id : INT, clé primaire, auto-incrémentée
+    name : VARCHAR(255), nom du membre de l'équipe
+    role : VARCHAR(255), rôle au sein du projet (ex : développeur, designer, chef de projet)
+    email : VARCHAR(255), adresse email du membre
+    profile_pic : VARCHAR(255), URL de la photo de profil (facultatif)
+
+4. Table project_team_members (Membres assignés aux projets)
+    id : INT, clé primaire, auto-incrémentée
+    project_id : INT, clé étrangère vers la table projects
+    team_member_id : INT, clé étrangère vers la table team_members
+    role : VARCHAR(255), rôle spécifique dans le projet (facultatif, si différent de leur rôle principal)
+
+5. Table testimonials (Témoignages)
+    id : INT, clé primaire, auto-incrémentée
+    project_id : INT, clé étrangère vers la table projects
+    client_name : VARCHAR(255), nom du client ou du partenaire
+    testimonial_text : TEXT, contenu du témoignage
+    rating : INT, note donnée par le client (ex: sur 5 étoiles)
+    date : DATE, date du témoignage
+
+6. Table contacts (Page de contact)
+    id : INT, clé primaire, auto-incrémentée
+    name : VARCHAR(255), nom de la personne qui a envoyé le message
+    email : VARCHAR(255), adresse email de la personne
+    subject : VARCHAR(255), objet du message
+    message : TEXT, contenu du message
+    sent_at : DATETIME, date et heure d’envoi du message
+
+7. Table media (Médias ou documents)
+    id : INT, clé primaire, auto-incrémentée
+    project_id : INT, clé étrangère vers la table projects
+    media_url : VARCHAR(255), URL du média (ex: une vidéo, un PDF, une image)
+    media_type : VARCHAR(50), type de média (ex: image, vidéo, document)
+
+8. Table partners (Partenaires ou sponsors)
+    id : INT, clé primaire, auto-incrémentée
+    name : VARCHAR(255), nom du partenaire ou sponsor
+    logo_url : VARCHAR(255), URL du logo du partenaire
+    website_url : VARCHAR(255), URL vers le site web du partenaire
